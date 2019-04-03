@@ -1,16 +1,17 @@
 #include "ctools.h"
-using namespace std;
 
 CommonTools *CommonTools::instance = NULL;
 cq::PrivateMessageEvent CommonTools::m_event;
+int CommonTools::count = 0;
 
 size_t CommonTools::receive_data(void *contents, size_t size, size_t nmemb, void *stream){
     string *str = (string*)stream;
     (*str).append((char*)contents, size*nmemb);
     // // return size * nmemb;
     // return 0;
-    cq::Message msg111 = u8"curl test over!";
     cq::PrivateMessageEvent e =  CommonTools::getInstance()->getEvent();
+    int c = CommonTools::getInstance()->getCount();
+    cq::Message msg111 = u8"curl test over!" + to_string(c);
     api::send_msg(e.target,msg111);
 
     return size * nmemb;
@@ -27,7 +28,12 @@ cq::PrivateMessageEvent CommonTools::getEvent(){
     //     return *m_user;
     // }
     // return t;
+    count += 1;
     return m_event;
+}
+
+int CommonTools::getCount(){
+    return count;
 }
 
 // size_t CommonTools::writedata2file(void *ptr, size_t size, size_t nmemb, FILE *stream) {

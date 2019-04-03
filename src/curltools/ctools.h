@@ -1,18 +1,12 @@
-#include <iostream>
 #include <curl/curl.h>
 // #include "zlib.h"
-#include <vector>
 #include <string>
-// #include <unistd.h>
-#include <io.h>
-#include <process.h>
-#include <memory.h>
-// #include <json/json.h>
 #include <sstream>
 #include <cstddef>
+#include <cstdlib>
 #include "cqsdk/cqsdk.h"
 #include "cqsdk/target.h"
-// using namespace std;
+using namespace std;
 
 namespace app = cq::app; // 插件本身的生命周期事件和管理
 namespace event = cq::event; // 用于注册 QQ 相关的事件处理函数
@@ -29,6 +23,7 @@ class CommonTools{
         int event;
         static CommonTools* instance;
         static cq::PrivateMessageEvent m_event;
+        static int count;
     public:
         static CommonTools* getInstance(){
             return instance;
@@ -46,5 +41,6 @@ class CommonTools{
         // static CURLcode HttpPost(const std::string & strUrl, std::string szJson,std::string & strResponse,int nTimeout);
         int setEvent(cq::PrivateMessageEvent e);
         cq::PrivateMessageEvent getEvent();
+        int getCount();
         
 };

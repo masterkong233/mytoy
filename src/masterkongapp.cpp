@@ -1,10 +1,8 @@
 #include "cqsdk/cqsdk.h"
-#include <vector>
 #include <string>
 #include "include/curl/curl.h"
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
 #include "curltools/ctools.h"
 using namespace std;
 
@@ -59,7 +57,8 @@ CQ_MAIN {
                 auto co = CommonTools::getInstance();
                 co->setEvent(e);
                 curl_easy_setopt(pCURL, CURLOPT_URL, "http://www.baidu.com");
-                
+                // curl_easy_setopt(pCURL, CURLOPT_POSTFIELDS, POSTFIELDS);
+                curl_easy_setopt(pCURL, CURLOPT_POST, 1); 
             //     curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 3); // set transport and time out time
 		    //     curl_easy_setopt(curl, CURLOPT_TIMEOUT, 3);
                 curl_easy_setopt(pCURL, CURLOPT_NOSIGNAL, 1L);
